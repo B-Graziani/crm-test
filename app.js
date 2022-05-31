@@ -15,6 +15,8 @@ app.get("/", (req, res) => {
 });
 
 require("./src/routes/produitRoutes/createProduit")(app);
+require("./src/routes/produitRoutes/allProduits")(app);
+require("./src/routes/produitRoutes/oneProduit")(app);
 
 app.listen(port, () => {
   console.log(`i m running on port : ${port}`);
