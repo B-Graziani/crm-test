@@ -2,6 +2,7 @@ const { Sequelize, Datatypes, DataTypes } = require("sequelize");
 const ProduitModel = require("../models/produit");
 const DocumentModel = require("../models/document");
 const ContactModel = require("../models/contact");
+const ContactProduitModel = require("../models/contactproduit");
 
 sequelize = new Sequelize("crm-test", "root", "root", {
   port: 8889,
@@ -24,6 +25,13 @@ sequelize
 const Produit = ProduitModel(sequelize, DataTypes);
 const Document = DocumentModel(sequelize, DataTypes);
 const Contact = ContactModel(sequelize, DataTypes);
+const ContactProduit = ContactProduitModel(sequelize, DataTypes);
+
+Contact.hasMany(Document);
+Document.belongsTo(Contact);
+
+Document.belongsToMany(Produit, { through: ContactProduit });
+Produit.belongsToMany(Document, { through: ContactProduit });
 
 const initDb = () => {
   sequelize.sync({ alter: true }).then(() => {
@@ -36,4 +44,5 @@ module.exports = {
   Produit,
   Document,
   Contact,
+  ContactProduit,
 };
