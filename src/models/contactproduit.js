@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       statuePayment: {
         type: DataTypes.STRING,
-        allowNull: false,
+        //peux etre null : true
+        allowNull: true,
       },
     },
     {
