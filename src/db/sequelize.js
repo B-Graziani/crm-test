@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const ProduitModel = require("../models/produit");
-const DocumentModel = require("../models/document");
+// const DocumentModel = require("../models/document");
 const ContactModel = require("../models/contact");
 const ContactProduitModel = require("../models/contactproduit");
 
@@ -23,15 +23,15 @@ sequelize
   });
 
 const Produit = ProduitModel(sequelize, DataTypes);
-const Document = DocumentModel(sequelize, DataTypes);
+// const Document = DocumentModel(sequelize, DataTypes);
 const Contact = ContactModel(sequelize, DataTypes);
 const ContactProduit = ContactProduitModel(sequelize, DataTypes);
 
-Contact.hasMany(Document);
-Document.belongsTo(Contact);
+Contact.hasMany(ContactProduit);
+ContactProduit.belongsTo(Contact);
 
-Document.belongsToMany(Produit, { through: ContactProduit });
-Produit.belongsToMany(Document, { through: ContactProduit });
+Contact.belongsToMany(Produit, { through: ContactProduit });
+Produit.belongsToMany(Contact, { through: ContactProduit });
 
 const initDb = () => {
   sequelize.sync({ alter: true }).then(() => {
@@ -42,7 +42,6 @@ const initDb = () => {
 module.exports = {
   initDb,
   Produit,
-  Document,
   Contact,
   ContactProduit,
 };

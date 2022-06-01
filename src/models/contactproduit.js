@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      statuePayment: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,
