@@ -27,7 +27,7 @@ module.exports = (app) => {
   let documentId;
   app.post("/api/contactproduit", (req, res) => {
     ContactProduit.create().then((data) => {
-      const message = "document bien cree !";
+      const message = "contact produit  bien cree !";
       //   let documentId = data.contactproduitId;
       documentId = data.contactproduitId;
       res.json({ message, data: data.contactproduitId });
